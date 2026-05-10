@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limmatelier — Workshop-Location in Zürich</title>
+  <meta name="description" content="Ein 110 Jahre altes Flusshaus direkt an der Limmat. Workshop-Location für Teams in Zürich. Hönggerstrasse 45A · 8037 Zürich.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --surface: #f8f8f7;
+      --surface-2: #f0f0ee;
+      --border: #e2e2df;
+      --muted: #6b6b68;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --nav-h: 132px;
+      --max-w: 1200px;
+      --pad: clamp(20px, 5vw, 64px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--black); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* ── NAV ── */
+    .nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+      background: transparent; border: none;
+      display: flex; align-items: flex-start;
+    }
+    .nav__inner {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      width: 100%; max-width: var(--max-w);
+      margin: 0 auto; padding: 10px var(--pad);
+    }
+    .hero__logo {
+      position: absolute; top: 20px; left: 20px;
+      z-index: 2; padding: 10px; display: flex;
+      transition: opacity 200ms;
+    }
+    .hero__logo img { height: 85px; width: auto; display: block; }
+    body.scrolled .hero__logo { opacity: 0; pointer-events: none; }
+    .nav__links { display: none; }
+    .nav__hamburger {
+      position: fixed; top: 57px; right: 20px; z-index: 300;
+      display: flex; flex-direction: column; gap: 9px;
+      cursor: pointer; padding: 10px; background: none; border: none;
+    }
+    .nav__hamburger span { display: block; width: 42px; height: 3px; background: var(--white); transition: all 220ms ease; }
+    body.scrolled .nav__hamburger span { background: var(--black); }
+    body.scrolled .nav__hamburger.open span { background: var(--white); }
+    .nav__hamburger.open span { background: var(--white); }
+    .nav__menu-logo {
+      position: absolute; top: 10px; left: 10px;
+      display: flex; align-items: center; padding: 10px;
+    }
+    .nav__menu-logo img { height: 100px; width: auto; display: block; }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .nav__mobile {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(7,71,118,0.97);
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 clamp(32px, 8vw, 120px);
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      color: var(--white);
+      text-align: right;
+      padding: 10px 0;
+      border: none;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      transition: opacity 150ms;
+    }
+    .nav__mobile a:last-child { border: none; margin-top: 0; font-weight: 800; }
+    .nav__mobile a:hover { opacity: 0.45; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+    }
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.1) 100%);
+    }
+    .hero__content {
+      position: relative; z-index: 1;
+      width: 100%; padding: 0 var(--pad) clamp(48px, 8vh, 80px);
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .hero__text {
+      margin-left: auto;
+      max-width: 52%;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-family: var(--font-display); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.92); margin-bottom: 28px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .hero__eyebrow svg { flex-shrink: 0; }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+      color: var(--white); margin-bottom: 36px;
+    }
+    @media (max-width: 768px) {
+      .hero__bg { object-position: 30% center; }
+      .hero__text { margin-left: 0; max-width: 100%; }
+    }
+    .hero__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .btn-hero {
+      font-family: var(--font-display); font-size: 15px; font-weight: 600;
+      background: var(--white); color: var(--black);
+      padding: 14px 28px; cursor: pointer; border: none;
+      transition: background 150ms, transform 150ms; display: inline-block;
+    }
+    .btn-hero:hover { background: #f0f0ee; transform: translateY(-1px); }
+    .btn-hero-ghost {
+      font-family: var(--font-display); font-size: 15px; font-weight: 500;
+      background: transparent; color: rgba(255,255,255,.85);
+      padding: 14px 28px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.35);
+      transition: border-color 150ms, color 150ms; display: inline-block;
+    }
+    .btn-hero-ghost:hover { border-color: rgba(255,255,255,.7); color: var(--white); }
+    .hero__stats {
+      display: flex; gap: clamp(28px, 5vw, 64px);
+      margin-top: 48px; flex-wrap: wrap;
+    }
+    .hero__stat-val {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700; color: var(--white); line-height: 1;
+    }
+    .hero__stat-lbl {
+      font-size: 12px; color: rgba(255,255,255,.55);
+      letter-spacing: 0.05em; text-transform: uppercase; margin-top: 5px;
+    }
+
+    /* ── SECTION BASE ── */
+    .section { padding: clamp(60px, 10vw, 120px) 0; }
+    .section--surface { background: var(--surface); }
+    .section--dark { background: var(--black); }
+    .section--brand { background: #074776; }
+    .section--border-top { border-top: 1px solid var(--border); }
+
+    .label-tag {
+      font-family: var(--font-display); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px; display: block;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+    }
+    .section-heading--white { color: var(--white); }
+    .section-subheading {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 600; line-height: 1.3; letter-spacing: -0.015em;
+    }
+
+    /* ── IDENTITY (Was wir sind) ── */
+    .identity__layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px); align-items: center;
+    }
+    .identity__text p {
+      font-size: clamp(16px, 1.6vw, 18px); color: var(--muted);
+      line-height: 1.75; margin-bottom: 20px;
+    }
+    .identity__text p:last-of-type { margin-bottom: 0; }
+    .identity__text strong { color: var(--black); font-weight: 600; }
+    .identity__metrics {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 36px;
+    }
+    .metric {
+      background: var(--white); padding: 24px 20px;
+    }
+    .metric__val {
+      font-family: var(--font-display); font-size: 1.6rem;
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1;
+    }
+    .metric__lbl {
+      font-size: 12px; color: var(--muted); margin-top: 4px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .identity__image { position: relative; }
+    .identity__image img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    @media (max-width: 768px) {
+      .identity__layout { grid-template-columns: 1fr; }
+      .identity__image { order: -1; }
+    }
+
+    /* ── NOT IDENTITY (bold dark) ── */
+    .not-identity__inner { max-width: 900px; }
+    .not-identity__big {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.03em;
+      color: var(--white); margin-bottom: 28px;
+    }
+    .not-identity__big span { opacity: .35; }
+    .not-identity__sub {
+      font-size: clamp(16px, 1.5vw, 18px); color: rgba(255,255,255,.55);
+      line-height: 1.7; max-width: 600px;
+    }
+
+    /* ── USE CASES ── */
+    .use-cases__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 40px;
+    }
+    .uc-card {
+      background: var(--white); padding: 36px 32px;
+      transition: background 150ms;
+    }
+    .uc-card:hover { background: var(--surface); }
+    .uc-num {
+      font-family: var(--font-display); font-size: 12px; font-weight: 600;
+      color: var(--muted); letter-spacing: 0.05em; margin-bottom: 20px; display: block;
+    }
+    .uc-card h3 {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      font-weight: 700; letter-spacing: -0.015em; margin-bottom: 10px;
+    }
+    .uc-card p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+    @media (max-width: 600px) { .use-cases__grid { grid-template-columns: 1fr; } }
+    .spaces__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.15);
+      border: none; margin-top: 48px;
+    }
+    .space-tile { background: #074776; padding: 28px 32px; }
+    .space-tile strong {
+      display: block; font-family: var(--font-display);
+      font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px;
+      color: var(--white);
+    }
+    .space-tile .space-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 16px; display: block; }
+    .space-tile ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .space-tile li { font-size: 14px; color: rgba(255,255,255,0.75); padding-left: 18px; position: relative; }
+    .space-tile li::before { content: '—'; position: absolute; left: 0; color: rgba(255,255,255,0.3); }
+    @media (max-width: 768px) { .spaces__grid { grid-template-columns: 1fr; } }
+
+    /* ── BEREICHE ── */
+    .bereich {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-top: 1px solid var(--border);
+      align-items: stretch;
+    }
+    .bereich:last-child { border-bottom: 1px solid var(--border); }
+    .bereich__img { position: relative; min-height: 480px; overflow: hidden; }
+    .bereich__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+    .bereich:hover .bereich__img img { transform: scale(1.03); }
+    .bereich__content {
+      padding: clamp(40px, 6vw, 80px); display: flex; flex-direction: column; justify-content: center;
+    }
+    .bereich.rev .bereich__img { order: 2; }
+    .bereich.rev .bereich__content { order: 1; }
+    .bereich__eyebrow {
+      font-family: var(--font-display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 12px;
+    }
+    .bereich__content h3 {
+      font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 8px;
+    }
+    .bereich__sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .bereich__list { display: flex; flex-direction: column; gap: 10px; }
+    .bereich__list li {
+      font-size: 15px; color: var(--muted); display: flex; align-items: baseline; gap: 10px;
+    }
+    .bereich__list li::before {
+      content: ''; width: 16px; height: 1px; background: var(--border);
+      display: inline-block; flex-shrink: 0; position: relative; top: -4px;
+    }
+    @media (max-width: 768px) {
+      .bereich { grid-template-columns: 1fr; }
+      .bereich__img { min-height: 280px; }
+      .bereich.rev .bereich__img { order: -1; }
+      .bereich.rev .bereich__content { order: 0; }
+    }
+
+    /* ── GALLERY ── */
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 40px);
+      padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px);
+      background: #074776;
+      margin-top: 32px;
+    }
+    .g-item {
+      overflow: visible; position: relative;
+      background: var(--white);
+      padding: 10px 10px 32px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.11), 0 2px 6px rgba(0,0,0,.07);
+      transition: transform 300ms ease, box-shadow 300ms ease;
+    }
+    .g-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .g-item:nth-child(1) { transform: rotate(-1.8deg); }
+    .g-item:nth-child(2) { transform: rotate(1.2deg); }
+    .g-item:nth-child(3) { transform: rotate(-0.7deg); }
+    .g-item:nth-child(4) { transform: rotate(1.6deg); }
+    .g-item:nth-child(5) { transform: rotate(-1.1deg); }
+    .g-item:nth-child(6) { transform: rotate(0.9deg); }
+    .g-item:nth-child(7) { transform: rotate(-1.4deg); }
+    .g-item:nth-child(8) { transform: rotate(0.7deg); }
+    .g-item:nth-child(9) { transform: rotate(-1.9deg); }
+    .g-item:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 14px 40px rgba(0,0,0,.16), 0 4px 12px rgba(0,0,0,.09);
+      z-index: 2;
+    }
+    .gallery__hd {
+      display: flex; align-items: baseline; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .gallery__more {
+      font-family: var(--font-display); font-size: 14px; font-weight: 600;
+      color: var(--muted); transition: color 150ms;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .gallery__more:hover { color: var(--black); }
+    @media (max-width: 768px) {
+      .gallery__grid { grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px 16px; }
+    }
+
+    /* ── PREISE ── */
+    .preise__layout {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 40px;
+    }
+    .p-block { background: var(--white); padding: 40px 36px; }
+    .p-block--surface { background: var(--surface); }
+    .p-eyebrow {
+      font-family: var(--font-display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+    }
+    .p-amount {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px;
+    }
+    .p-unit { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .p-rule { border: none; border-top: 1px solid var(--border); margin-bottom: 24px; }
+    .p-detail { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .p-detail strong { color: var(--black); }
+    .inc-heading {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .inc-list { display: flex; flex-direction: column; gap: 12px; }
+    .inc-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--muted);
+    }
+    .inc-item::before {
+      content: ''; width: 16px; height: 16px; flex-shrink: 0;
+      background: var(--black); border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 12px; background-repeat: no-repeat; background-position: center;
+      margin-top: 1px;
+    }
+    .preise__notice {
+      grid-column: 1 / -1; background: var(--surface-2);
+      padding: 20px 24px; border-top: 1px solid var(--border);
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+    }
+    .preise__notice strong { color: var(--black); }
+    @media (max-width: 900px) { .preise__layout { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .preise__layout { grid-template-columns: 1fr; } }
+
+    /* ── ÜBER UNS ── */
+    .ueber__layout { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .ueber__body p { font-size: clamp(15px, 1.4vw, 17px); color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+    .portraits { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .portrait-card { flex: 1; background: var(--white); display: flex; flex-direction: column; }
+    .portrait-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; }
+    .portrait-name {
+      padding: 16px 20px;
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 480px) { .portraits { flex-direction: column; } }
+    @media (max-width: 768px) { .ueber__layout { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* ── LAGE ── */
+    .lage__layout { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
+    .lage__addr { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+    .t-list { display: flex; flex-direction: column; gap: 0; }
+    .t-item {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 15px; color: var(--muted);
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .t-item:first-child { border-top: 1px solid var(--border); }
+    .t-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .map-embed {
+      width: 100%; aspect-ratio: 16/9; border: 1px solid var(--border); overflow: hidden;
+    }
+    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    .map-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: var(--muted);
+    }
+    .map-placeholder p { font-family: var(--font-display); font-weight: 600; }
+    .map-placeholder small { font-size: 13px; }
+    @media (max-width: 768px) { .lage__layout { grid-template-columns: 1fr; gap: 32px; } }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 40px; max-width: 800px; }
+    details.fq { border-top: 1px solid var(--border); }
+    details.fq:last-child { border-bottom: 1px solid var(--border); }
+    details.fq summary {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; gap: 20px; cursor: pointer; list-style: none; user-select: none;
+    }
+    details.fq summary::-webkit-details-marker { display: none; }
+    .fq-q {
+      font-family: var(--font-display); font-size: clamp(15px, 1.4vw, 17px);
+      font-weight: 600; color: var(--black);
+    }
+    .fq-arrow {
+      width: 32px; height: 32px; flex-shrink: 0; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 150ms, border-color 150ms;
+    }
+    .fq-arrow svg { transition: transform 300ms ease; }
+    details.fq[open] .fq-arrow { background: var(--black); border-color: var(--black); }
+    details.fq[open] .fq-arrow svg { transform: rotate(90deg); }
+    details.fq[open] .fq-arrow svg path { stroke: white; }
+    .fq-ans {
+      padding-bottom: 24px; font-size: 15px; color: var(--muted);
+      line-height: 1.75; max-width: 640px;
+    }
+
+    /* ── CONTACT ── */
+    .contact__layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .contact__info .section-heading--white { margin-bottom: 32px; }
+    .c-info { display: flex; flex-direction: column; gap: 0; margin-bottom: 40px; }
+    .c-info-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 16px; color: rgba(255,255,255,.75);
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .c-info-item:first-child { border-top: 1px solid rgba(255,255,255,.1); }
+    .c-info-item a { color: var(--white); transition: opacity 150ms; }
+    .c-info-item a:hover { opacity: 0.7; }
+    .c-price-box {
+      border: 1px solid rgba(255,255,255,.15); padding: 28px 24px;
+    }
+    .c-price-title {
+      font-family: var(--font-display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,.45); margin-bottom: 16px; display: block;
+    }
+    .c-price-list { display: flex; flex-direction: column; gap: 8px; }
+    .c-price-list li { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.6; }
+    .c-price-list li strong { color: var(--white); }
+
+    .c-form {
+      background: var(--white); padding: clamp(28px, 4vw, 48px);
+    }
+    @media (max-width: 900px) { .contact__layout { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); padding: 28px 0;
+    }
+    .foot__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .foot__l {
+      font-family: var(--font-display); font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,.35); letter-spacing: 0.02em;
+    }
+    .foot__r { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    .foot__r span { font-size: 13px; color: rgba(255,255,255,.25); }
+    .foot__r a { font-size: 13px; color: rgba(255,255,255,.35); transition: color 150ms; }
+    .foot__r a:hover { color: rgba(255,255,255,.75); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+    <div class="nav__inner">
+      <div class="nav__links">
+        <a href="#räume" class="nav__link">Räume</a>
+        <a href="#tage" class="nav__link">Wofür</a>
+        <a href="#preise" class="nav__link">Preise</a>
+        <a href="#über-uns" class="nav__link">Über uns</a>
+        <a href="#anfragen" class="nav__cta">Anfragen</a>
+      </div>
+      <button class="nav__hamburger" id="ham" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-nav">
+      <a href="#" class="nav__menu-logo" aria-label="Limmatelier – Startseite">
+        <img src="images/Limmatelier Logo Transparent.png" alt="Limmatelier">
+      </a>
+      <a href="#räume">Workshop-Raum</a>
+      <a href="#tage">Dafür kommst du</a>
+      <a href="#preise">Unsere Preise</a>
+      <a href="#über-uns">Verein Flusshüsli</a>
+      <a href="#faq">Fragen und Antworten</a>
+      <a href="#anfragen">Anfragen →</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" aria-label="Willkommen">
+  <img class="hero__bg" src="images/Limmatelier Luftbild.jpg" alt="Limmatelier – Blick von oben auf das Flusshaus an der Limmat">
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <a href="#" class="hero__logo" aria-label="Limmatelier – Startseite">
+    <img src="images/Logo Transparent.png" alt="Limmatelier">
+  </a>
+  <div class="container hero__content">
+    <div class="hero__text">
+      <p class="hero__eyebrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        Workshop-Location · Hönggerstrasse 45A · Zürich
+      </p>
+      <h1 class="hero__title">Ein Haus an der Limmat, gemacht für Workshops.</h1>
+      <div class="hero__actions">
+        <a href="#anfragen" class="btn-hero">Tag anfragen</a>
+        <a href="#räume" class="btn-hero-ghost">Mehr erfahren</a>
+      </div>
+      <div class="hero__stats">
+      <div>
+        <div class="hero__stat-val">10</div>
+        <div class="hero__stat-lbl">Personen</div>
+      </div>
+      <div>
+        <div class="hero__stat-val">50 m²</div>
+        <div class="hero__stat-lbl">Seminarraum</div>
+      </div>
+      <div>
+        <div class="hero__stat-val">1916</div>
+        <div class="hero__stat-lbl">Baujahr</div>
+      </div>
+      <div>
+        <div class="hero__stat-val">Limmat</div>
+        <div class="hero__stat-lbl">vor der Tür</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAS WIR SIND -->
+<section class="section section--border-top" id="räume">
+  <div class="container">
+    <div class="identity__layout">
+      <div>
+        <span class="label-tag">Das Limmatelier direkt an der Limmat</span>
+        <h2 class="section-heading" style="margin-bottom: 28px;">Baujahr 1916. Was als Metzgerei und Hühnerstall begann, ist heute ein Ort für Workshops &amp; Meetings — direkt an der Limmat.</h2>
+        <div class="identity__text">
+          <p>Du kommst morgens mit deinem Team hier rein und gehst abends raus mit echten Entscheidungen.</p>
+        </div>
+        <div class="identity__metrics">
+          <div class="metric">
+            <div class="metric__val">1916</div>
+            <div class="metric__lbl">Gebaut</div>
+          </div>
+          <div class="metric">
+            <div class="metric__val">50 m²</div>
+            <div class="metric__lbl">Seminarraum</div>
+          </div>
+          <div class="metric">
+            <div class="metric__val">10</div>
+            <div class="metric__lbl">Personen max.</div>
+          </div>
+          <div class="metric">
+            <div class="metric__val">1</div>
+            <div class="metric__lbl">Garten am Wasser</div>
+          </div>
+        </div>
+      </div>
+      <div class="identity__image">
+        <img src="images/Limmatelier Kunstbild.jpg" alt="Limmatelier – das Flusshaus von aussen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAS WIR SIND UND WAS NICHT -->
+<section class="section section--brand">
+  <div class="container">
+    <div class="not-identity__inner">
+      <span class="label-tag" style="color: rgba(255,255,255,.4)">Was wir sind und was nicht</span>
+      <p class="not-identity__big">
+        <span>Kein Konferenzraum.</span><br>
+        <span>Kein Partyraum.</span><br>
+        <span>Keine Hochzeitslocation.</span><br>
+        Wir sind eine Workshop-Location für Firmen.
+      </p>
+      <p class="not-identity__sub">Fokussiert auf Tage, an denen Teams arbeiten, denken und entscheiden.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="section section--surface section--border-top" id="tage">
+  <div class="container">
+    <span class="label-tag">Wofür du kommst</span>
+    <h2 class="section-heading">Vier typische Tage bei uns.</h2>
+    <div class="use-cases__grid">
+      <div class="uc-card">
+        <span class="uc-num">01</span>
+        <h3>Strategie-Offsite</h3>
+        <p>Jahresplanung, OKRs, schwierige Entscheidungen — fern vom Office, nah am Wasser.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-num">02</span>
+        <h3>Team Building</h3>
+        <p>Gemeinsam kochen, grillen, Boule spielen. Nicht peinlich, einfach schön.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-num">03</span>
+        <h3>Brainstorming</h3>
+        <p>Whiteboard-Wand, Magnetwand, Post-its — Raum zum Denken und Entwickeln.</p>
+      </div>
+      <div class="uc-card">
+        <span class="uc-num">04</span>
+        <h3>Kunden-Workshop</h3>
+        <p>Beeindrucken ohne anzugeben. Limmat-Blick und historisches Ambiente inklusive.</p>
+      </div>
+    </div>
+    <div class="spaces__grid">
+      <div class="space-tile">
+        <strong>Seminarraum</strong>
+        <span class="space-sub">50 m² · bis 10 Personen</span>
+        <ul>
+          <li>10er-Tisch</li>
+          <li>Screen für Präsentationen</li>
+          <li>Whiteboard- &amp; Magnetwand</li>
+          <li>Flipchart</li>
+        </ul>
+      </div>
+      <div class="space-tile">
+        <strong>Küche &amp; Grill</strong>
+        <span class="space-sub">Voll ausgestattet</span>
+        <ul>
+          <li>Herd, Ofen, Kühlschrank</li>
+          <li>Gas-Kugel-Grill draussen</li>
+          <li>3 Festbankgarnituren</li>
+          <li>Bistrotische</li>
+        </ul>
+      </div>
+      <div class="space-tile">
+        <strong>Garten an der Limmat</strong>
+        <span class="space-sub">Direkt am Wasser</span>
+        <ul>
+          <li>Sitzplätze direkt am Wasser</li>
+          <li>Hobby-Boule-Bahn</li>
+          <li>Apéro-tauglich bei jedem Wetter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- GALERIE -->
+<section class="section section--surface section--border-top">
+  <div class="container">
+    <div class="gallery__hd">
+      <div>
+        <span class="label-tag">Atmosphäre</span>
+        <h2 class="section-heading">Das Haus in Bildern.</h2>
+      </div>
+      <a href="#anfragen" class="gallery__more">Besichtigung anfragen →</a>
+    </div>
+  </div>
+  <div class="gallery__grid" role="list">
+    <div class="g-item" role="listitem">
+      <img src="images/1_Limmatelier Quer.jpg" alt="Limmatelier – Hauptraum">
+    </div>
+    <div class="g-item" role="listitem">
+      <img src="images/7_Limmatelier.jpg" alt="Limmatelier – Innenansicht">
+    </div>
+    <div class="g-item" role="listitem">
+      <img src="images/6_Limmatelier Quer.jpg" alt="Limmatelier – Küche">
+    </div>
+    <div class="g-item" role="listitem">
+      <img src="images/13_Limmatelier Quer.jpg" alt="Limmatelier – Detail">
+    </div>
+    <div class="g-item" role="listitem">
+      <img src="images/16_Limmatelier Quer.jpg" alt="Limmatelier – Garten">
+    </div>
+    <div class="g-item" role="listitem">
+      <img src="images/12_Limmatelier Quer.jpg" alt="Limmatelier – Aussenbereich">
+    </div>
+  </div>
+</section>
+
+<!-- PREISE -->
+<section class="section section--border-top" id="preise">
+  <div class="container">
+    <span class="label-tag">Preise</span>
+    <h2 class="section-heading">Transparent. Alles drin.</h2>
+    <div class="preise__layout">
+      <div class="p-block">
+        <p class="p-eyebrow">Stundensatz</p>
+        <div class="p-amount">95.–</div>
+        <p class="p-unit">CHF / Stunde</p>
+        <hr class="p-rule">
+        <p class="p-detail">Mindestbuchung <strong>6 Stunden</strong></p>
+        <p class="p-detail">Ab CHF <strong>570.–</strong></p>
+        <p class="p-detail">Tages-Cap <strong>CHF 1200.–</strong> (bis 22:00)</p>
+      </div>
+      <div class="p-block">
+        <p class="inc-heading">Im Preis enthalten</p>
+        <ul class="inc-list">
+          <li class="inc-item">Miete des ganzen Hauses</li>
+          <li class="inc-item">Mobiliar &amp; Ausstattung</li>
+          <li class="inc-item">Whiteboard, Flipchart, Screen, Internet</li>
+          <li class="inc-item">Kaffee &amp; Mineral</li>
+          <li class="inc-item">Reinigung inklusive</li>
+          <li class="inc-item">Buchbar bis 22:00 Uhr</li>
+        </ul>
+      </div>
+      <div class="p-block p-block--surface">
+        <p class="p-eyebrow">Berechnungsbeispiel</p>
+        <p style="font-size:15px;color:var(--muted);line-height:1.7;">
+          Halbtag (4h) → Mindestbuchung 6h<br>
+          <strong style="color:var(--black)">= CHF 570.– total</strong>
+        </p>
+        <hr class="p-rule" style="margin-top:24px;">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;">
+          Ganzer Tag bis 22:00 Uhr gedeckelt bei <strong style="color:var(--black)">CHF 1200.–</strong>
+        </p>
+      </div>
+      <div class="preise__notice">
+        <strong>Wichtig:</strong> Den Raum bitte besenrein hinterlassen — Geschirr abgewaschen, Abfall entsorgt. Die Endreinigung übernehmen wir und ist im Preis enthalten.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section class="section section--surface section--border-top" id="über-uns">
+  <div class="container">
+    <div class="ueber__layout">
+      <div>
+        <span class="label-tag">Hinter dem Haus</span>
+        <h2 class="section-heading">Verein Flusshüsli</h2>
+      </div>
+      <div class="ueber__body">
+        <p>Drei Köpfe, ein Haus. 2022 gegründet, weil das alte Flusshäuschen zu schön war, um leer zu stehen — und weil Zürich eine Workshop-Location direkt am Wasser verdient hat.</p>
+        <div class="portraits">
+          <div class="portrait-card">
+            <img src="images/Freddy Hüsser.png" alt="Freddy Hüsser">
+            <div class="portrait-name">Freddy Hüsser</div>
+          </div>
+          <div class="portrait-card">
+            <img src="images/Daniel-Andres-Egli.jpg" alt="Daniel-Andres Egli">
+            <div class="portrait-name">Daniel-Andres Egli</div>
+          </div>
+          <div class="portrait-card">
+            <img src="images/Dominik-Widmer.jpg" alt="Dominik Widmer">
+            <div class="portrait-name">Dominik Widmer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAGE -->
+<section class="section section--border-top">
+  <div class="container">
+    <div class="lage__layout">
+      <div>
+        <span class="label-tag">Hier sind wir</span>
+        <h2 class="section-heading" style="margin-bottom:16px;">Wipkingen, Zürich</h2>
+        <p class="lage__addr">Hönggerstrasse 45A · 8037 Zürich</p>
+        <ul class="t-list">
+          <li class="t-item">
+            <span class="t-dot"></span>
+            Tram Wipkingen — 4 Min Fussweg
+          </li>
+          <li class="t-item">
+            <span class="t-dot"></span>
+            Bahnhof Hardbrücke — 8 Min Fussweg
+          </li>
+          <li class="t-item">
+            <span class="t-dot"></span>
+            Blaue Zone vor dem Haus
+          </li>
+          <li class="t-item">
+            <span class="t-dot"></span>
+            Veloweg direkt an der Limmat
+          </li>
+        </ul>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.040144433573!2d8.524968099999999!3d47.391649599999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b4c1e3e3341%3A0xe08c3b76448db775!2sLimmatelier%20-%20Workshop-%20und%20Team-Eventraum%20in%20Z%C3%BCrich!5e0!3m2!1sde!2sch!4v1778420373698!5m2!1sde!2sch" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Limmatelier auf Google Maps"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section section--surface section--border-top">
+  <div class="container">
+    <span class="label-tag">Häufige Fragen</span>
+    <h2 class="section-heading">Alles Wichtige auf einen Blick.</h2>
+    <div class="faq-list">
+      <details class="fq" open>
+        <summary>
+          <span class="fq-q">Wie lange muss ich mindestens buchen?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">6 Stunden · CHF 570.–. Jede weitere Stunde CHF 95.–. Gedeckelt bei CHF 1200.– (ganzer Tag bis 22:00).</p>
+      </details>
+      <details class="fq">
+        <summary>
+          <span class="fq-q">Wie viele Personen passen rein?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">Bis zu 10 Personen am Tisch, mehr im Garten und Aussenbereich.</p>
+      </details>
+      <details class="fq">
+        <summary>
+          <span class="fq-q">Catering — selber oder über euch?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">Catering bieten wir selbst keines an. Unser Tipp: die <strong>WIM Bakery</strong> macht auf Anfrage Focaccia-Sandwiches und Gebäck — einfach direkt anfragen unter <a href="mailto:jonas@wim-bakery.ch" style="color:var(--black);text-decoration:underline;">jonas@wim-bakery.ch</a>.</p>
+      </details>
+      <details class="fq">
+        <summary>
+          <span class="fq-q">Was ist mit der Reinigung?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">Endreinigung ist im Preis inklusive. Den Raum bitte besenrein zurückgeben — Geschirr abgewaschen, Abfall und Flaschen entsorgt.</p>
+      </details>
+      <details class="fq">
+        <summary>
+          <span class="fq-q">Bis wann darf ich bleiben?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">22:00 Uhr ist Schluss — aus Fairness unseren Nachbar*innen gegenüber.</p>
+      </details>
+      <details class="fq">
+        <summary>
+          <span class="fq-q">Gibt es Parkplätze?</span>
+          <span class="fq-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </summary>
+        <p class="fq-ans">Blaue Zone vor dem Haus. Der ÖV ist aber die ehrlichere Antwort: Escher-Wyss-Platz 6 Min., Bahnhof Hardbrücke 10 Min., Zürich HB 13 Min.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section section--brand" id="anfragen">
+  <div class="container">
+    <div class="contact__layout">
+      <div class="contact__info">
+        <span class="label-tag" style="color: rgba(255,255,255,.3)">Anfrage</span>
+        <h2 class="section-heading section-heading--white">Interesse am Limmatelier? Dann schreib uns, wir antworten so schnell wie möglich.</h2>
+        <div class="c-info">
+          <div class="c-info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,.4)" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <a href="tel:+41798874546">+41 79 887 45 46</a>
+          </div>
+          <div class="c-info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,.4)" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:event@limmatelier.ch">event@limmatelier.ch</a>
+          </div>
+        </div>
+        <div class="c-price-box">
+          <span class="c-price-title">Mietpreise &amp; Leistungen</span>
+          <ul class="c-price-list">
+            <li>· <strong>Mietpreis ab CHF 570.–</strong> (6h Mindestbuchung)</li>
+            <li>· <strong>Jede weitere Stunde CHF 95.–</strong> (max. CHF 1200.– bis 22:00)</li>
+            <li>· Alle Preise <strong>inkl. Endreinigung</strong></li>
+            <li>· Ausstattung: Whiteboard, Magnetwand, Flipchart, Screen, Internet, Kaffee &amp; Mineral</li>
+          </ul>
+        </div>
+      </div>
+      <div class="c-form">
+        <script src="https://js-eu1.hsforms.net/forms/embed/148420263.js" defer></script>
+        <div class="hs-form-frame" data-region="eu1" data-form-id="8078d77c-2d30-4933-b31c-5769552b4390" data-portal-id="148420263"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot__inner">
+      <span class="foot__l">Limmatelier · Verein Flusshüsli</span>
+      <div class="foot__r">
+        <span>Hönggerstrasse 45A, 8037 Zürich</span>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const ham = document.getElementById('ham');
+  const mob = document.getElementById('mobile-nav');
+
+  ham.addEventListener('click', () => {
+    const open = mob.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', open);
+  });
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mob.classList.remove('open');
+    ham.classList.remove('open');
+    ham.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Logo swap: transparent on dark hero, blue on light sections
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    const obs = new IntersectionObserver(([entry]) => {
+      document.body.classList.toggle('scrolled', !entry.isIntersecting);
+    }, { threshold: 0.05 });
+    obs.observe(hero);
+  }
+</script>
+</body>
+</html>
