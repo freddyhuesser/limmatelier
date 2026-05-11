@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danke für deine Anfrage – Limmatelier</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --surface: #f8f8f7;
+      --surface-blue: #eaf1f8;
+      --surface-blue-2: #dde9f4;
+      --border: #e2e2df;
+      --muted: #6b6b68;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --max-w: 1200px;
+      --pad: clamp(20px, 5vw, 64px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); color: var(--black); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='28'%3E%3Cpath d='M0 14 C60 5,180 23,240 14' stroke='%23074776' stroke-width='0.9' fill='none' stroke-opacity='0.03'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 18px var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white);
+    }
+    .nav__logo {
+      font-family: var(--font-display); font-size: 18px; font-weight: 800;
+      letter-spacing: -0.03em; color: #074776;
+    }
+    .nav__back {
+      font-family: var(--font-display); font-size: 14px; font-weight: 600;
+      color: var(--muted); display: flex; align-items: center; gap: 6px;
+      transition: color 150ms;
+    }
+    .nav__back:hover { color: var(--black); }
+
+    /* HERO / DANKE */
+    .danke {
+      padding: clamp(44px, 7vw, 72px) var(--pad);
+    }
+    .danke__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 8vw, 100px);
+      align-items: center;
+    }
+    .danke__icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--surface-blue);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .danke__icon svg { color: #074776; }
+    .danke__label {
+      font-family: var(--font-display); font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #074776; margin-bottom: 16px; display: block;
+    }
+    .danke__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+      color: var(--black); margin-bottom: 20px;
+    }
+    .danke__text {
+      font-size: clamp(16px, 1.4vw, 18px); color: var(--muted); line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .danke__text strong { color: var(--black); }
+    .danke__contact {
+      display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px;
+    }
+    .danke__contact a {
+      font-size: 15px; color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
+      transition: color 150ms;
+    }
+    .danke__contact a:hover { color: var(--black); }
+    .danke__img {
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,.12), 0 8px 20px rgba(0,0,0,.07);
+    }
+    .danke__img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      aspect-ratio: 4/5;
+    }
+    @media (max-width: 768px) {
+      .danke__inner { grid-template-columns: 1fr; }
+      .danke__img { order: -1; max-height: 340px; }
+      .danke__img img { aspect-ratio: 16/9; object-position: center 30%; }
+    }
+
+    .danke__scroll {
+      display: inline-flex; flex-direction: column; align-items: flex-start;
+      gap: 4px; color: var(--black); transition: opacity 150ms;
+    }
+    .danke__scroll:hover { opacity: 0.6; }
+    .danke__scroll span {
+      font-family: 'Georgia', serif; font-style: italic;
+      font-size: 16px; color: var(--black);
+    }
+    .danke__scroll svg { margin-left: 12px; }
+
+    /* BTN */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-display); font-size: 15px; font-weight: 700;
+      background: #074776; color: var(--white);
+      padding: 14px 30px; cursor: pointer;
+      transition: background 150ms, transform 150ms;
+    }
+    .btn:hover { background: #055a97; transform: translateY(-1px); }
+    .btn--outline {
+      background: transparent; color: #074776; border: 2px solid #074776; margin-left: 12px;
+    }
+    .btn--outline:hover { background: #074776; color: var(--white); transform: translateY(-1px); }
+
+    /* SECTION BASICS */
+    .section { padding: clamp(60px, 10vw, 120px) 0; }
+    .section--border-top { border-top: 1px solid var(--border); }
+    .label-tag {
+      font-family: var(--font-display); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px; display: block;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+    }
+    .projekte__intro {
+      max-width: 700px;
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 56px;
+    }
+
+    /* PROJEKT CARDS */
+    .projekte__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.55fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .projekt-card { border: 1px solid var(--border); overflow: hidden; }
+    .projekt-card__imgs { display: flex; flex-direction: column; gap: 3px; }
+    .projekt-card__imgs .flyer {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: contain; background: var(--surface-blue);
+      display: block; cursor: zoom-in; transition: opacity 150ms;
+    }
+    .projekt-card__imgs .flyer:hover { opacity: 0.9; }
+    .projekt-card__imgs .flyer--tall { aspect-ratio: 708/1000; }
+    .projekt-imgs-live {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+    }
+    .projekt-imgs-live img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      display: block; cursor: zoom-in; transition: opacity 150ms;
+    }
+    .projekt-imgs-live img:hover { opacity: 0.9; }
+    .projekt-card__body { padding: 22px 20px 26px; }
+    .projekt-year {
+      display: inline-block;
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #074776; margin-bottom: 10px;
+    }
+    .projekt-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+      font-weight: 800; letter-spacing: -0.025em;
+      line-height: 1.15; margin-bottom: 12px;
+    }
+    .projekt-card__body p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .projekt-info {
+      margin: 0 -20px -26px !important; padding: 14px 20px !important;
+      font-size: 13px !important; font-family: var(--font-display); font-weight: 600;
+      color: #074776 !important; background: var(--surface-blue-2);
+      border-top: 1px solid var(--border);
+    }
+    .projekt-link { color: #074776; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+    .projekt-link:hover { opacity: 0.7; }
+
+    /* LIGHTBOX */
+    #lb {
+      display: none; position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,0.93);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    #lb.open { display: flex; }
+    #lb img { max-width: 92vw; max-height: 92vh; object-fit: contain; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+    #lb-close {
+      position: absolute; top: 20px; right: 28px;
+      color: white; font-size: 36px; line-height: 1;
+      cursor: pointer; opacity: 0.7; font-family: sans-serif;
+    }
+    #lb-close:hover { opacity: 1; }
+
+    /* FLUSS-SCHÄNKE featured */
+    .projekt-card--featured {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border); overflow: hidden;
+    }
+    .featured-imgs {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      border-right: 1px solid var(--border);
+      overflow: hidden; align-self: stretch; min-height: 340px;
+    }
+    .featured-imgs img,
+    .featured-imgs video {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
+    }
+    .featured-imgs img:first-child { grid-row: 1 / 3; object-position: center center; }
+    .featured-imgs img:not(:first-child),
+    .featured-imgs video { border-left: 2px solid var(--white); }
+    .featured-imgs img:nth-child(4),
+    .featured-imgs video { border-top: 2px solid var(--white); }
+    .projekt-card--featured .projekt-card__body {
+      padding: 40px 44px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .projekt-card--featured .projekt-title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); }
+
+    @media (max-width: 900px) {
+      .projekte__grid { grid-template-columns: 1fr; gap: 20px; }
+      .projekt-card:nth-child(1) { order: 3; }
+      .projekt-card:nth-child(2) { order: 1; }
+      .projekt-card:nth-child(3) { order: 2; }
+      .projekt-card--featured { grid-template-columns: 1fr; order: 4; }
+      .projekt-card--featured .projekt-card__body { padding: 28px 24px; }
+    }
+
+    /* FOOTER */
+    footer {
+      background: #074776;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='28'%3E%3Cpath d='M0 14 C60 5,180 23,240 14' stroke='white' stroke-width='0.9' fill='none' stroke-opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      padding: 24px var(--pad);
+      text-align: center;
+    }
+    footer p { font-size: 13px; color: rgba(255,255,255,.45); }
+    footer a { color: rgba(255,255,255,.6); transition: color 150ms; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav__logo">Limmatelier</a>
+  <a href="index.html" class="nav__back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Zurück zur Startseite
+  </a>
+</nav>
+
+<!-- DANKE -->
+<div class="danke">
+  <div class="danke__inner">
+    <div class="danke__content">
+      <div class="danke__icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <span class="danke__label">Anfrage erhalten</span>
+      <h1 class="danke__heading">Vielen Dank für dein Interesse am Limmatelier!</h1>
+      <p class="danke__text">
+        Deine Anfrage ist bei uns angekommen. Wir melden uns <strong>in der Regel innerhalb von 24 Stunden</strong> — meistens früher. Bis dahin kannst du uns auch direkt erreichen:
+      </p>
+      <div class="danke__contact">
+        <a href="tel:+41798874546">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          +41 79 887 45 46
+        </a>
+        <a href="mailto:event@limmatelier.ch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          event@limmatelier.ch
+        </a>
+      </div>
+      <a href="#projekte" class="danke__scroll">
+        <span>Schau dir noch unsere Projekte an</span>
+        <svg width="70" height="80" viewBox="0 0 70 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 15 5 C -5 30, 55 35, 38 72" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M 38 72 L 28 63" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 38 72 L 48 63" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </a>
+    </div>
+    <div class="danke__img">
+      <img src="images/Verein Flusshüsli Danke.jpg" alt="Verein Flusshüsli – Freddy, Daniel-Andres und Dominik">
+    </div>
+  </div>
+</div>
+
+<!-- VEREINSPROJEKTE -->
+<section class="section" id="projekte">
+  <div class="container">
+    <span class="label-tag">Verein Flusshüsli</span>
+    <h2 class="section-heading">Unsere Vereinsprojekte</h2>
+    <p class="projekte__intro">Das Herzstück unseres Vereins ist die Belebung des Limmateliers – Haus und Garten, einzigartig direkt an der Limmat. Was einst mit einer WM-Übertragung begann, ist heute ein wachsendes Programm für alle, die gerne zusammenkommen, gut essen, etwas trinken und Zeit am Wasser verbringen.<br><br>Seit März 2026 veranstalten wir gemeinsam mit der lokalen WIM Bakery jeden zweiten Samstag unseren Brunch mit anschliessendem Apéro. Am 28. Mai startet «Apéro am Wasser» mit vier Donnerstags-Ausgaben direkt an der Limmat. Im Juli folgt mit «Wir am Strom» ein Daydance am Fluss, bevor im Herbst die Fluss-Schänke (geschlossene Gesellschaft) zurückkehrt – unser zweiwöchiges Food-Pop-up mit mehreren Gängen direkt im Limmatelier.</p>
+    <div class="projekte__grid">
+
+      <div class="projekt-card">
+        <div class="projekt-card__imgs">
+          <img class="flyer" src="images/WIR AM STROM-1.jpg" alt="Wir am Strom – Flyer 1">
+          <img class="flyer" src="images/WIR AM STROM-2.jpg" alt="Wir am Strom – Flyer 2">
+        </div>
+        <div class="projekt-card__body">
+          <span class="projekt-year">25. Juli 2026</span>
+          <h3 class="projekt-title">WIR AM STROM</h3>
+          <p>Den Garten direkt an der Limmat für alle öffnen — das war der Anfang. Mit einer WM-Übertragung, kühlen Getränken und dem Fluss vor der Tür wurde aus einem Experiment eine Tradition.</p>
+          <p class="projekt-info"><a href="https://eventfrog.ch/en/p/parties/electro/wir-am-strom-7451982861261893838.html" target="_blank" rel="noopener" class="projekt-link">Tickets →</a></p>
+        </div>
+      </div>
+
+      <div class="projekt-card">
+        <div class="projekt-card__imgs">
+          <img class="flyer flyer--tall" src="images/WIM am Wasser.jpeg" alt="WIM am Wasser – Flyer">
+          <div class="projekt-imgs-live">
+            <img src="images/WIM am Wasser_1.jpeg" alt="WIM am Wasser – Live">
+            <img src="images/WIM am Wasser_2.jpeg" alt="WIM am Wasser – Live">
+          </div>
+        </div>
+        <div class="projekt-card__body">
+          <span class="projekt-year">Seit März 2026</span>
+          <h3 class="projekt-title">WIM am Wasser</h3>
+          <p>Zweiwöchig öffnen wir als Pop-up-Beiz mit mehreren Gängen — kochen, tischen, geniessen, direkt am Wasser. Seit 2026 kommt die WIM-Bakery dazu und verwandelt den Garten an Samstagen in einen Brunch-Ort.</p>
+          <p class="projekt-info">Ohne Voranmeldung — einfach eintreten.</p>
+        </div>
+      </div>
+
+      <div class="projekt-card">
+        <div class="projekt-card__imgs">
+          <img class="flyer" src="images/APÉRO AM WASSER_1.jpg" alt="Apéro am Wasser – Flyer 1">
+          <img class="flyer" src="images/APÉRO AM WASSER_2.jpg" alt="Apéro am Wasser – Flyer 2">
+        </div>
+        <div class="projekt-card__body">
+          <span class="projekt-year">Ab 28. Mai</span>
+          <h3 class="projekt-title">APÉRO AM WASSER</h3>
+          <p>Manchmal braucht es nicht viel: einen schönen Abend, gute Gesellschaft und einen Tisch am Fluss. Unser Garten ist die natürliche Kulisse — wir sorgen für den Rest.</p>
+          <p class="projekt-info">Ohne Voranmeldung — einfach eintreten.</p>
+        </div>
+      </div>
+
+      <div class="projekt-card projekt-card--featured">
+        <div class="featured-imgs">
+          <img src="images/Flussschänki_1.jpg" alt="Fluss-Schänke">
+          <img src="images/Flussschänki_2.jpg" alt="Fluss-Schänke">
+          <img src="images/Flussschänki_4.jpg" alt="Fluss-Schänke">
+          <img src="images/Flussschänki_3.jpg" alt="Fluss-Schänke">
+          <video src="images/Flussschänke_Video.mp4" autoplay muted loop playsinline></video>
+        </div>
+        <div class="projekt-card__body">
+          <span class="projekt-year">Herbst 2026</span>
+          <h3 class="projekt-title">FLUSS-SCHÄNKE (geschlossene Gesellschaft)</h3>
+          <p>Die Fluss-Schänke kehrt zurück: unser zweiwöchiges Food-Pop-up mit mehreren Gängen, direkt im Limmatelier. Gekocht wird saisonal, getischt wird am Wasser — in kleiner Runde, mit grossem Aufwand.</p>
+          <p class="projekt-info">Infos zum Verkauf folgen.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Limmatelier · Verein Flusshüsli · <a href="index.html">limmatelier.ch</a></p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="Bild vergrössert">
+  <span id="lb-close" aria-label="Schliessen" onclick="document.getElementById('lb').classList.remove('open')">&times;</span>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<script>
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  document.querySelectorAll('.projekt-card__imgs .flyer, .projekt-imgs-live img').forEach(img => {
+    img.addEventListener('click', () => { lbImg.src = img.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
+
+</body>
+</html>
