@@ -498,7 +498,8 @@
       transition: background 150ms;
     }
     .video-play:hover { background: rgba(0,0,0,0.32); }
-    .video-wrap.playing .video-play { display: none; }
+    .video-wrap.playing .video-play { opacity: 0; background: transparent; }
+    .video-wrap.playing .video-play:hover { opacity: 1; background: rgba(0,0,0,0.28); }
     .projekt-card__imgs .flyer {
       width: 100%;
       aspect-ratio: 4/5;
@@ -912,42 +913,6 @@
         </div>
       </div>
     </div>
-    <h3 style="font-family:var(--font-display);font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;color:var(--black);margin:clamp(40px,6vw,64px) 0 24px;">Ausstattung im Detail</h3>
-    <div class="spaces__grid">
-      <div class="space-tile">
-        <strong>Workshopraum</strong>
-        <span class="space-sub">50 m² · bis 10 Personen</span>
-        <ul>
-          <li>10er-Tisch</li>
-          <li>Screen für Präsentationen</li>
-          <li>Whiteboard- &amp; Magnetwand</li>
-          <li>Flipchart</li>
-          <li>Moderationskoffer</li>
-        </ul>
-      </div>
-      <div class="space-tile">
-        <strong>Küche</strong>
-        <span class="space-sub">Voll ausgestattet</span>
-        <ul>
-          <li>Komplett eingerichtete Küche</li>
-          <li>Herd, Ofen, Kühlschrank</li>
-          <li>3 Festbankgarnituren</li>
-          <li>Bistrotische</li>
-        </ul>
-      </div>
-      <div class="space-tile">
-        <strong>Garten an der Limmat</strong>
-        <span class="space-sub">Direkt am Wasser</span>
-        <ul>
-          <li>Sitzplätze direkt am Wasser</li>
-          <li>Grill</li>
-          <li>Raum für bis zu 30 Apéro-Gäste</li>
-        </ul>
-      </div>
-    </div>
-    <div class="btn-wrap">
-      <a href="#anfragen" class="btn">Anfragen</a>
-    </div>
   </div>
 </section>
 
@@ -1040,8 +1005,41 @@
         <strong>Wichtig:</strong> Den Raum bitte besenrein hinterlassen — Geschirr abgewaschen, Abfall entsorgt. Die Endreinigung übernehmen wir und ist im Preis enthalten.
       </div>
     </div>
+    <h3 style="font-family:var(--font-display);font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;color:var(--black);margin:clamp(40px,6vw,64px) 0 24px;">Ausstattung im Detail</h3>
+    <div class="spaces__grid">
+      <div class="space-tile">
+        <strong>Workshopraum</strong>
+        <span class="space-sub">50 m² · bis 10 Personen</span>
+        <ul>
+          <li>10er-Tisch</li>
+          <li>Screen für Präsentationen</li>
+          <li>Whiteboard- &amp; Magnetwand</li>
+          <li>Flipchart</li>
+          <li>Moderationskoffer</li>
+        </ul>
+      </div>
+      <div class="space-tile">
+        <strong>Küche</strong>
+        <span class="space-sub">Voll ausgestattet</span>
+        <ul>
+          <li>Komplett eingerichtete Küche</li>
+          <li>Herd, Ofen, Kühlschrank</li>
+          <li>3 Festbankgarnituren</li>
+          <li>Bistrotische</li>
+        </ul>
+      </div>
+      <div class="space-tile">
+        <strong>Garten an der Limmat</strong>
+        <span class="space-sub">Direkt am Wasser</span>
+        <ul>
+          <li>Sitzplätze direkt am Wasser</li>
+          <li>Grill</li>
+          <li>Raum für bis zu 30 Apéro-Gäste</li>
+        </ul>
+      </div>
+    </div>
     <div class="btn-wrap" style="margin-top:48px;display:flex;flex-wrap:wrap;gap:12px;">
-      <a href="#anfragen" class="btn">Jetzt anfragen &amp; buchen</a>
+      <a href="#anfragen" class="btn">Jetzt anfragen</a>
       <a href="#anfragen" class="btn btn--outline">Frage stellen</a>
     </div>
   </div>
@@ -1453,11 +1451,20 @@
   lb.addEventListener('click', () => lb.classList.remove('open'));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 
+  const playSVG = `<circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><path d="M21 17l18 9-18 9V17z" fill="#074776"/>`;
+  const pauseSVG = `<circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><rect x="17" y="16" width="7" height="20" rx="2" fill="#074776"/><rect x="28" y="16" width="7" height="20" rx="2" fill="#074776"/>`;
   document.querySelectorAll('.video-wrap').forEach(wrap => {
     const vid = wrap.querySelector('video');
     const btn = wrap.querySelector('.video-play');
-    btn.addEventListener('click', () => { vid.play(); wrap.classList.add('playing'); });
-    vid.addEventListener('ended', () => wrap.classList.remove('playing'));
+    const svg = btn.querySelector('svg');
+    btn.addEventListener('click', () => {
+      if (vid.paused) {
+        vid.play(); wrap.classList.add('playing'); svg.innerHTML = pauseSVG;
+      } else {
+        vid.pause(); wrap.classList.remove('playing'); svg.innerHTML = playSVG;
+      }
+    });
+    vid.addEventListener('ended', () => { wrap.classList.remove('playing'); svg.innerHTML = playSVG; });
   });
 
   const contactForm = document.getElementById('contact-form');
