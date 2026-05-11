@@ -159,12 +159,17 @@
     /* PROJEKT CARDS */
     .projekte__grid {
       display: grid;
-      grid-template-columns: 1fr 1.55fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
       align-items: start;
     }
     .projekt-card { border: 1px solid var(--border); overflow: hidden; }
     .projekt-card__imgs { display: flex; flex-direction: column; gap: 3px; }
+    .video-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+    .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.18); border: none; cursor: pointer; padding: 0; transition: background 150ms; }
+    .video-play:hover { background: rgba(0,0,0,0.32); }
+    .video-wrap.playing .video-play { display: none; }
     .projekt-card__imgs .flyer {
       width: 100%; aspect-ratio: 4/5;
       object-fit: contain; background: var(--surface-blue);
@@ -218,39 +223,12 @@
     }
     #lb-close:hover { opacity: 1; }
 
-    /* FLUSS-SCHÄNKE featured */
-    .projekt-card--featured {
-      grid-column: 1 / -1;
-      display: grid; grid-template-columns: 1fr 1fr;
-      border: 1px solid var(--border); overflow: hidden;
-    }
-    .featured-imgs {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      border-right: 1px solid var(--border);
-      overflow: hidden; align-self: stretch; min-height: 340px;
-    }
-    .featured-imgs img,
-    .featured-imgs video {
-      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
-    }
-    .featured-imgs img:first-child { grid-row: 1 / 3; object-position: center center; }
-    .featured-imgs img:not(:first-child),
-    .featured-imgs video { border-left: 2px solid var(--white); }
-    .featured-imgs img:nth-child(4),
-    .featured-imgs video { border-top: 2px solid var(--white); }
-    .projekt-card--featured .projekt-card__body {
-      padding: 40px 44px; display: flex; flex-direction: column; justify-content: center;
-    }
-    .projekt-card--featured .projekt-title { font-size: clamp(1.5rem, 2.5vw, 2.2rem); }
-
     @media (max-width: 900px) {
       .projekte__grid { grid-template-columns: 1fr; gap: 20px; }
-      .projekt-card:nth-child(1) { order: 3; }
-      .projekt-card:nth-child(2) { order: 1; }
+      .projekt-card:nth-child(1) { order: 1; }
+      .projekt-card:nth-child(2) { order: 3; }
       .projekt-card:nth-child(3) { order: 2; }
-      .projekt-card--featured { grid-template-columns: 1fr; order: 4; }
-      .projekt-card--featured .projekt-card__body { padding: 28px 24px; }
+      .projekt-card:nth-child(4) { order: 4; }
     }
 
     /* FOOTER */
@@ -325,23 +303,12 @@
 
       <div class="projekt-card">
         <div class="projekt-card__imgs">
-          <img class="flyer" src="images/WIR AM STROM-1.jpg" alt="Wir am Strom – Flyer 1">
-          <img class="flyer" src="images/WIR AM STROM-2.jpg" alt="Wir am Strom – Flyer 2">
-        </div>
-        <div class="projekt-card__body">
-          <span class="projekt-year">25. Juli 2026</span>
-          <h3 class="projekt-title">WIR AM STROM</h3>
-          <p>Den Garten direkt an der Limmat für alle öffnen — das war der Anfang. Mit einer WM-Übertragung, kühlen Getränken und dem Fluss vor der Tür wurde aus einem Experiment eine Tradition.</p>
-          <p class="projekt-info"><a href="https://eventfrog.ch/en/p/parties/electro/wir-am-strom-7451982861261893838.html" target="_blank" rel="noopener" class="projekt-link">Tickets →</a></p>
-        </div>
-      </div>
-
-      <div class="projekt-card">
-        <div class="projekt-card__imgs">
           <img class="flyer flyer--tall" src="images/WIM am Wasser.jpeg" alt="WIM am Wasser – Flyer">
           <div class="projekt-imgs-live">
             <img src="images/WIM am Wasser_1.jpeg" alt="WIM am Wasser – Live">
             <img src="images/WIM am Wasser_2.jpeg" alt="WIM am Wasser – Live">
+            <img src="images/WIM am Wasser_Gebäck.JPG" alt="WIM am Wasser – Gebäck">
+            <img src="images/WIM am Wasser_Apéro.jpeg" alt="WIM am Wasser – Apéro">
           </div>
         </div>
         <div class="projekt-card__body">
@@ -349,6 +316,29 @@
           <h3 class="projekt-title">WIM am Wasser</h3>
           <p>Zweiwöchig öffnen wir als Pop-up-Beiz mit mehreren Gängen — kochen, tischen, geniessen, direkt am Wasser. Seit 2026 kommt die WIM-Bakery dazu und verwandelt den Garten an Samstagen in einen Brunch-Ort.</p>
           <p class="projekt-info">Ohne Voranmeldung — einfach eintreten.</p>
+        </div>
+      </div>
+
+      <div class="projekt-card">
+        <div class="projekt-card__imgs">
+          <div class="video-wrap">
+            <video src="images/WIR AM STROM 2025.mp4" muted playsinline></video>
+            <button class="video-play" aria-label="Video abspielen">
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><path d="M21 17l18 9-18 9V17z" fill="#074776"/></svg>
+            </button>
+          </div>
+          <div class="projekt-imgs-live">
+            <img src="images/WIR AM STROM-1.jpg" alt="Wir am Strom – Flyer 1">
+            <img src="images/WIR AM STROM-2.jpg" alt="Wir am Strom – Flyer 2">
+            <img src="images/WIR AM STROM_Event 1.jpeg" alt="Wir am Strom – Event">
+            <img src="images/WIR AM STROM_Event 2.jpeg" alt="Wir am Strom – Event">
+          </div>
+        </div>
+        <div class="projekt-card__body">
+          <span class="projekt-year">25. Juli 2026</span>
+          <h3 class="projekt-title">WIR AM STROM</h3>
+          <p>Den Garten direkt an der Limmat für alle öffnen — das war der Anfang. Mit einer WM-Übertragung, kühlen Getränken und dem Fluss vor der Tür wurde aus einem Experiment eine Tradition.</p>
+          <p class="projekt-info"><a href="https://eventfrog.ch/en/p/parties/electro/wir-am-strom-7451982861261893838.html" target="_blank" rel="noopener" class="projekt-link">Tickets →</a></p>
         </div>
       </div>
 
@@ -365,13 +355,20 @@
         </div>
       </div>
 
-      <div class="projekt-card projekt-card--featured">
-        <div class="featured-imgs">
-          <img src="images/Flussschänki_1.jpg" alt="Fluss-Schänke">
-          <img src="images/Flussschänki_2.jpg" alt="Fluss-Schänke">
-          <img src="images/Flussschänki_4.jpg" alt="Fluss-Schänke">
-          <img src="images/Flussschänki_3.jpg" alt="Fluss-Schänke">
-          <video src="images/Flussschänke_Video.mp4" autoplay muted loop playsinline></video>
+      <div class="projekt-card">
+        <div class="projekt-card__imgs">
+          <div class="video-wrap">
+            <video src="images/Flussschänke_Video.mp4" muted playsinline></video>
+            <button class="video-play" aria-label="Video abspielen">
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><path d="M21 17l18 9-18 9V17z" fill="#074776"/></svg>
+            </button>
+          </div>
+          <div class="projekt-imgs-live">
+            <img src="images/Flussschänki_1.jpg" alt="Fluss-Schänke">
+            <img src="images/Flussschänki_2.jpg" alt="Fluss-Schänke">
+            <img src="images/Flussschänki_3.jpg" alt="Fluss-Schänke">
+            <img src="images/Flussschänki_4.jpg" alt="Fluss-Schänke">
+          </div>
         </div>
         <div class="projekt-card__body">
           <span class="projekt-year">Herbst 2026</span>
@@ -403,6 +400,13 @@
   });
   lb.addEventListener('click', () => lb.classList.remove('open'));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+  document.querySelectorAll('.video-wrap').forEach(wrap => {
+    const vid = wrap.querySelector('video');
+    const btn = wrap.querySelector('.video-play');
+    btn.addEventListener('click', () => { vid.play(); wrap.classList.add('playing'); });
+    vid.addEventListener('ended', () => wrap.classList.remove('playing'));
+  });
 </script>
 
 </body>
