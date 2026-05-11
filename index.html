@@ -139,10 +139,17 @@
       color: var(--white); margin-bottom: 36px;
     }
     @media (max-width: 768px) {
+      .hero { min-height: 100dvh; }
       .hero__bg { object-position: 30% center; }
-      .hero__text { margin-left: 0; max-width: 100%; }
-      .hero__eyebrow { font-size: 10px; padding: 7px 14px; gap: 7px; }
+      .hero__logo { left: 50%; transform: translateX(-50%); }
+      .hero__logo img { height: 72px; }
+      .hero__content { padding-bottom: clamp(28px, 5vh, 48px); }
+      .hero__text { margin-left: 0; max-width: 100%; text-align: center; }
+      .hero__eyebrow { font-size: 10px; padding: 6px 14px; gap: 7px; margin-bottom: 16px; }
       .hero__eyebrow svg { width: 12px; height: 12px; }
+      .eyebrow-addr { display: none; }
+      .hero__title { font-size: clamp(1.9rem, 9vw, 2.8rem); margin-bottom: 20px; }
+      .hero__actions { justify-content: center; gap: 12px; }
     }
     .hero__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
     .btn-hero {
@@ -717,6 +724,7 @@
       .contact__heading { grid-column: 1; grid-row: auto; order: 1; }
       .c-form { grid-column: 1; grid-row: auto; order: 2; }
       .c-info { grid-column: 1; grid-row: auto; order: 3; }
+      .f-row { grid-template-columns: 1fr; }
     }
 
     /* ── FOOTER ── */
@@ -823,7 +831,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>
-        Workshop-Location · Hönggerstrasse 45A · Zürich
+        Workshop-Location<span class="eyebrow-addr"> · Hönggerstrasse 45A</span> · Zürich
       </p>
       <h1 class="hero__title">Ein Raum an der Limmat, gemacht für Workshops.</h1>
       <div class="hero__actions">
@@ -926,7 +934,7 @@
     <div class="gallery__hd">
       <div>
         <span class="label-tag">Atmosphäre</span>
-        <h2 class="section-heading">Unser Haus am Whiteboard.</h2>
+        <h2 class="section-heading">Das erwartet euch.</h2>
       </div>
       <a href="#anfragen" class="gallery__more">Besichtigung anfragen →</a>
     </div>
@@ -957,7 +965,7 @@
       <img src="images/4_Limmatelier Quer.jpg" alt="Limmatelier – Detail">
     </div>
     <div class="g-item" role="listitem">
-      <img src="images/5_Limmatelier Quer.jpg" alt="Limmatelier – Atmosphäre">
+      <img src="images/3_Limmatelier Quer.jpg" alt="Limmatelier – Atmosphäre">
     </div>
   </div>
 </section>
@@ -1187,7 +1195,7 @@
       <div class="projekt-card">
         <div class="projekt-card__imgs">
           <div class="video-wrap">
-            <video src="images/WIR AM STROM 2025.mp4" muted playsinline></video>
+            <video src="images/WIR AM STROM 2025.mp4" poster="images/WIR AM STROM_Event 1.jpeg" muted playsinline></video>
             <button class="video-play" aria-label="Video abspielen">
               <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><path d="M21 17l18 9-18 9V17z" fill="#074776"/></svg>
             </button>
@@ -1223,7 +1231,7 @@
       <div class="projekt-card">
         <div class="projekt-card__imgs">
           <div class="video-wrap">
-            <video src="images/Flussschänke_Video.mp4" muted playsinline></video>
+            <video src="images/Flussschänke_Video.mp4" poster="images/Flussschänki_1.jpg" muted playsinline></video>
             <button class="video-play" aria-label="Video abspielen">
               <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,0.92)"/><path d="M21 17l18 9-18 9V17z" fill="#074776"/></svg>
             </button>
@@ -1254,23 +1262,27 @@
       <div>
         <span class="label-tag">Hier sind wir</span>
         <h2 class="section-heading" style="margin-bottom:16px;">Wipkingen, Zürich</h2>
-        <p class="lage__addr">Hönggerstrasse 45A · 8037 Zürich</p>
+        <p class="lage__addr"><a href="https://www.google.com/maps/place/Limmatelier/@47.3916496,8.5249681,17z" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Hönggerstrasse 45A · 8037 Zürich</a></p>
         <ul class="t-list">
           <li class="t-item">
             <span class="t-dot"></span>
-            Tram Wipkingen — 4 Min Fussweg
+            <span>Tram Wipkingen — 5 Min. Fussweg</span>
           </li>
           <li class="t-item">
             <span class="t-dot"></span>
-            Bahnhof Hardbrücke — 8 Min Fussweg
+            <span>Bahnhof Hardbrücke — 10 Min. Fussweg</span>
           </li>
           <li class="t-item">
             <span class="t-dot"></span>
-            Blaue Zone im Quartier. Coop gegenüber hat ganztags Parking.
+            <span>Zürich HB — 13 Min. Fussweg</span>
           </li>
           <li class="t-item">
             <span class="t-dot"></span>
-            Veloweg direkt an der Limmat
+            <span>Blaue Zone im Quartier. Coop gegenüber hat ganztags Parking.</span>
+          </li>
+          <li class="t-item">
+            <span class="t-dot"></span>
+            <span>Veloweg direkt an der Limmat</span>
           </li>
         </ul>
       </div>
@@ -1351,7 +1363,7 @@
             </svg>
           </span>
         </summary>
-        <p class="fq-ans">Blaue Zone vor dem Haus. Der ÖV ist aber die ehrlichere Antwort: Escher-Wyss-Platz 6 Min., Bahnhof Hardbrücke 10 Min., Zürich HB 13 Min.</p>
+        <p class="fq-ans">Blaue Zone im Quartier. Der ÖV ist aber die ehrlichere Antwort: Tram Wipkingen 5 Min., Bahnhof Hardbrücke 10 Min., Zürich HB 13 Min.</p>
       </details>
     </div>
   </div>
