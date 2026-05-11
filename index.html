@@ -711,6 +711,49 @@
     .c-form {
       background: var(--white); padding: clamp(28px, 4vw, 48px);
     }
+    .c-form form { display: flex; flex-direction: column; gap: 0; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .f-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .f-field label {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
+    }
+    .f-field label .req { color: #074776; margin-left: 2px; }
+    .f-field input,
+    .f-field textarea,
+    .f-field select {
+      font-family: var(--font-body); font-size: 15px; font-weight: 400; color: var(--black);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 11px 14px; outline: none;
+      transition: border-color 150ms, background 150ms;
+      width: 100%;
+    }
+    .f-field input:focus,
+    .f-field textarea:focus { border-color: #074776; background: var(--white); }
+    .f-field textarea { resize: vertical; min-height: 90px; }
+    .f-checks { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .f-checks label {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 4px; display: block;
+    }
+    .f-check {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 400;
+      color: var(--black); cursor: pointer;
+    }
+    .f-check input[type="checkbox"] {
+      width: 17px; height: 17px; accent-color: #074776;
+      flex-shrink: 0; cursor: pointer; margin: 0;
+    }
+    .f-submit {
+      font-family: var(--font-display); font-size: 15px; font-weight: 700;
+      background: #074776; color: var(--white);
+      padding: 15px 32px; border: none; cursor: pointer;
+      transition: background 150ms, transform 150ms;
+      width: 100%; margin-top: 8px;
+    }
+    .f-submit:hover { background: #055a97; transform: translateY(-1px); }
     @media (max-width: 900px) {
       .contact__layout { grid-template-columns: 1fr; grid-template-rows: auto; }
       .contact__heading { grid-column: 1; grid-row: auto; order: 1; }
@@ -1056,8 +1099,63 @@
         <h2 class="section-heading section-heading--white">Interesse am Limmatelier? Dann schreib uns, wir antworten so schnell wie möglich.</h2>
       </div>
       <div class="c-form">
-        <script src="https://js-eu1.hsforms.net/forms/embed/148420263.js" defer></script>
-        <div class="hs-form-frame" data-region="eu1" data-form-id="8078d77c-2d30-4933-b31c-5769552b4390" data-portal-id="148420263"></div>
+        <form id="contact-form" action="https://formspree.io/f/mojryweb" method="POST">
+          <input type="hidden" name="_next" value="https://test.limmatelier.ch/danke.html">
+          <input type="hidden" name="_language" value="de">
+
+          <div class="f-row">
+            <div class="f-field">
+              <label>Vorname<span class="req">*</span></label>
+              <input type="text" name="vorname" required placeholder="Max">
+            </div>
+            <div class="f-field">
+              <label>Nachname<span class="req">*</span></label>
+              <input type="text" name="nachname" required placeholder="Muster">
+            </div>
+          </div>
+
+          <div class="f-row">
+            <div class="f-field">
+              <label>E-Mail<span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="max@firma.ch">
+            </div>
+            <div class="f-field">
+              <label>Telefonnummer</label>
+              <input type="tel" name="telefon" placeholder="+41 79 000 00 00">
+            </div>
+          </div>
+
+          <div class="f-field">
+            <label>Firma<span class="req">*</span></label>
+            <input type="text" name="firma" required placeholder="Muster AG">
+          </div>
+
+          <div class="f-row">
+            <div class="f-field">
+              <label>Gewünschtes Datum</label>
+              <input type="date" name="datum">
+            </div>
+            <div class="f-field">
+              <label>Anzahl Personen</label>
+              <input type="number" name="personen" min="1" max="30" placeholder="z.B. 8">
+            </div>
+          </div>
+
+          <div class="f-checks">
+            <label>Art der Anfrage</label>
+            <label class="f-check"><input type="checkbox" name="art[]" value="Konkrete Anfrage"> Konkrete Anfrage</label>
+            <label class="f-check"><input type="checkbox" name="art[]" value="Provisorische Anfrage"> Provisorische Anfrage</label>
+            <label class="f-check"><input type="checkbox" name="art[]" value="Ich möchte eine Besichtigung"> Ich möchte eine Besichtigung</label>
+            <label class="f-check"><input type="checkbox" name="art[]" value="Einfach eine Frage"> Einfach eine Frage</label>
+          </div>
+
+          <div class="f-field">
+            <label>Bemerkungen / Extras</label>
+            <textarea name="bemerkungen" placeholder="Catering, besondere Wünsche, Fragen…"></textarea>
+          </div>
+
+          <button type="submit" class="f-submit">Anfrage absenden →</button>
+        </form>
       </div>
       <div class="c-info">
         <div class="c-info-item">
@@ -1373,6 +1471,32 @@
   });
   lb.addEventListener('click', () => lb.classList.remove('open'));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('.f-submit');
+      btn.textContent = 'Wird gesendet…';
+      btn.disabled = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          window.location.href = 'https://test.limmatelier.ch/danke.html';
+        } else {
+          btn.textContent = 'Fehler – bitte erneut versuchen';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Fehler – bitte erneut versuchen';
+        btn.disabled = false;
+      }
+    });
+  }
 </script>
 
 <div id="lb" role="dialog" aria-modal="true" aria-label="Bild vergrössert">
