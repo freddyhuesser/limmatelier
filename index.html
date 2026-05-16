@@ -1071,7 +1071,7 @@
       </div>
       <div class="c-form">
         <form id="contact-form" action="https://formspree.io/f/mojryweb" method="POST">
-          <input type="hidden" name="_next" value="https://test.limmatelier.ch/danke.html">
+          <input type="hidden" name="_next" value="https://limmatelier.ch/danke.html">
           <input type="hidden" name="_language" value="de">
 
           <div class="f-row">
@@ -1126,6 +1126,7 @@
               </select>
             </div>
           </div>
+          <input type="hidden" name="preis_indikation" id="preis-hidden">
           <div id="preis-preview" style="display:none; background:var(--surface-blue); border:1px solid var(--surface-blue-2); padding:12px 16px; margin-bottom:12px; font-family:var(--font-display); font-size:14px; color:#074776;">
             <span id="preis-stunden"></span> · <strong id="preis-chf"></strong>
           </div>
@@ -1558,10 +1559,13 @@
       const minuten = (bh * 60 + bm) - (vh * 60 + vm);
       const stunden = minuten / 60;
       const preis = Math.min(stunden * 95, 1200);
-      document.getElementById('preis-stunden').textContent = stunden % 1 === 0
+      const stundenText = stunden % 1 === 0
         ? stunden + ' Stunden'
         : stunden.toFixed(1).replace('.', ',') + ' Stunden';
-      document.getElementById('preis-chf').textContent = 'CHF ' + preis.toLocaleString('de-CH') + '.–';
+      const preisText = 'CHF ' + preis.toLocaleString('de-CH') + '.–';
+      document.getElementById('preis-stunden').textContent = stundenText;
+      document.getElementById('preis-chf').textContent = preisText;
+      document.getElementById('preis-hidden').value = stundenText + ' · ' + preisText;
       preview.style.display = 'block';
     }
 
@@ -1583,14 +1587,20 @@
           headers: { Accept: 'application/json' }
         });
         if (res.ok) {
-          window.location.href = 'https://test.limmatelier.ch/danke.html';
+          window.location.href = 'https://limmatelier.ch/danke.html';
         } else {
+          const data = await res.json().catch(() => ({}));
+          const msg = data.error || ('HTTP ' + res.status);
           btn.textContent = 'Fehler – bitte erneut versuchen';
           btn.disabled = false;
+          console.error('Formspree error:', res.status, data);
+          alert('Formular-Fehler: ' + msg);
         }
-      } catch {
+      } catch (err) {
         btn.textContent = 'Fehler – bitte erneut versuchen';
         btn.disabled = false;
+        console.error('Submit error:', err);
+        alert('Netzwerkfehler: ' + err.message);
       }
     });
   }
