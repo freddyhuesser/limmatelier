@@ -741,28 +741,28 @@
       line-height: 1.1; margin-bottom: 24px;
     }
     .foot__tagline {
-      font-size: 15px; color: rgba(255,255,255,.6);
+      font-size: 15px; color: var(--white);
       line-height: 1.6; margin-bottom: 32px;
     }
     .foot__contacts { display: flex; flex-direction: column; gap: 10px; }
     .foot__contacts a {
-      font-size: 14px; color: rgba(255,255,255,.55);
+      font-size: 14px; color: var(--white);
       transition: color 150ms; display: flex; align-items: center; gap: 10px;
     }
-    .foot__contacts a:hover { color: var(--white); }
+    .foot__contacts a:hover { color: var(--white); text-decoration: underline; }
     .foot__nav { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .foot__col { display: flex; flex-direction: column; gap: 14px; }
     .foot__col-title {
       font-family: var(--font-display); font-size: 11px; font-weight: 700;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(255,255,255,.35); margin-bottom: 4px;
+      color: var(--white); margin-bottom: 4px;
     }
     .foot__col a {
-      font-size: 15px; color: rgba(255,255,255,.65);
+      font-size: 15px; color: var(--white);
       transition: color 150ms;
     }
-    .foot__col a:hover { color: var(--white); }
-    .foot__divider { border: none; border-top: 1px solid rgba(255,255,255,.12); margin: 0; }
+    .foot__col a:hover { color: var(--white); text-decoration: underline; }
+    .foot__divider { border: none; border-top: 1px solid rgba(255,255,255,.25); margin: 0; }
     .foot__bottom { padding: 20px 0; }
     .foot__inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -770,12 +770,12 @@
     }
     .foot__l {
       font-family: var(--font-display); font-size: 13px; font-weight: 500;
-      color: rgba(255,255,255,.3);
+      color: var(--white);
     }
     .foot__r { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
-    .foot__r span { font-size: 13px; color: rgba(255,255,255,.25); }
-    .foot__r a { font-size: 13px; color: rgba(255,255,255,.35); transition: color 150ms; }
-    .foot__r a:hover { color: rgba(255,255,255,.75); }
+    .foot__r span { font-size: 13px; color: var(--white); }
+    .foot__r a { font-size: 13px; color: var(--white); transition: color 150ms; }
+    .foot__r a:hover { color: var(--white); text-decoration: underline; }
     @media (max-width: 768px) {
       .foot__grid { grid-template-columns: 1fr; }
       .foot__nav { grid-template-columns: 1fr 1fr; }
@@ -1139,8 +1139,8 @@
           </div>
 
           <div class="f-field">
-            <label>Bemerkungen / Extras</label>
-            <textarea name="bemerkungen" placeholder="Catering, besondere Wünsche, Fragen…"></textarea>
+            <label>Bemerkungen</label>
+            <textarea name="bemerkungen" placeholder="Besondere Wünsche, Fragen, Anmerkungen…"></textarea>
           </div>
 
           <button type="submit" class="f-submit">Anfrage absenden →</button>
@@ -1194,7 +1194,7 @@
   <div class="container">
     <span class="label-tag">Verein Flusshüsli</span>
     <h2 class="section-heading">Unsere Vereinsprojekte</h2>
-    <p class="projekte__intro">Das Herzstück unseres Vereins ist die Belebung des Limmateliers – Haus und Garten, einzigartig direkt an der Limmat. Was einst mit einer WM-Übertragung begann, ist heute ein wachsendes Programm für alle, die gerne zusammenkommen, gut essen, etwas trinken und Zeit am Wasser verbringen.<br><br>Seit März 2026 veranstalten wir gemeinsam mit der lokalen WIM Bakery jeden zweiten Samstag unseren Brunch mit anschliessendem Apéro. Am 28. Mai startet «Apéro am Wasser» mit vier Donnerstags-Ausgaben direkt an der Limmat. Im Juli folgt mit «Wir am Strom» ein Daydance am Fluss, bevor im Herbst die Fluss-Schänke (geschlossene Gesellschaft) zurückkehrt – unser zweiwöchiges Food-Pop-up mit mehreren Gängen direkt im Limmatelier.</p>
+    <p class="projekte__intro">Das Herzstück unseres Vereins ist die Belebung des Limmateliers – Haus und Garten, einzigartig direkt an der Limmat. Was einst mit einer WM-Übertragung begann, ist heute ein wachsendes Programm für alle, die gerne zusammenkommen, gut essen, etwas trinken und Zeit am Wasser verbringen.<br><br>Seit März 2026 veranstalten wir gemeinsam mit der lokalen WIM Bakery jeden zweiten Samstag unseren Brunch mit anschliessendem Apéro. Am 28. Mai startet «Apéro am Wasser» mit vier Donnerstags-Ausgaben direkt an der Limmat. Im Juli folgt mit «Wir am Strom» ein Daydance am Fluss, bevor vom 4. bis 14. November die Fluss-Schänke zurückkehrt – unser zweiwöchiges Food-Pop-up mit mehreren Gängen direkt im Limmatelier.</p>
     <div class="projekte__grid">
 
       <div class="projekt-card">
@@ -1208,7 +1208,7 @@
           </div>
         </div>
         <div class="projekt-card__body">
-          <span class="projekt-year">Seit März 2026</span>
+          <span class="projekt-year">Frühling 2026</span>
           <h3 class="projekt-title">WIM am Wasser</h3>
           <p>Zweiwöchig öffnen wir als Pop-up-Beiz mit mehreren Gängen — kochen, tischen, geniessen, direkt am Wasser. Seit 2026 kommt die WIM-Bakery dazu und verwandelt den Garten an Samstagen in einen Brunch-Ort.</p>
           <p class="projekt-info">Ohne Voranmeldung — einfach eintreten.</p>
@@ -1244,7 +1244,7 @@
           <img class="flyer" src="images/APÉRO AM WASSER_2.jpg" alt="Apéro am Wasser – Flyer 2">
         </div>
         <div class="projekt-card__body">
-          <span class="projekt-year">Ab 28. Mai</span>
+          <span class="projekt-year">Mai 2026</span>
           <h3 class="projekt-title">APÉRO AM WASSER</h3>
           <p>Manchmal braucht es nicht viel: einen schönen Abend, gute Gesellschaft und einen Tisch am Fluss. Unser Garten ist die natürliche Kulisse — wir sorgen für den Rest.</p>
           <p class="projekt-info">Ohne Voranmeldung — einfach eintreten.</p>
@@ -1267,10 +1267,10 @@
           </div>
         </div>
         <div class="projekt-card__body">
-          <span class="projekt-year">Herbst 2026</span>
-          <h3 class="projekt-title">FLUSS-SCHÄNKE (geschlossene Gesellschaft)</h3>
+          <span class="projekt-year">4. – 14. November 2026</span>
+          <h3 class="projekt-title">FLUSS-SCHÄNKE</h3>
           <p>Die Fluss-Schänke kehrt zurück: unser zweiwöchiges Food-Pop-up mit mehreren Gängen, direkt im Limmatelier. Gekocht wird saisonal, getischt wird am Wasser — in kleiner Runde, mit grossem Aufwand.</p>
-          <p class="projekt-info">Infos zum Verkauf folgen.</p>
+          <p class="projekt-info"><a href="https://fluss-schaenke.ch/" target="_blank" rel="noopener" class="projekt-link">Tickets →</a></p>
         </div>
       </div>
 
