@@ -245,6 +245,8 @@
     }
     .identity__image { position: relative; }
     .identity__image img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .identity__thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .identity__thumbs img { aspect-ratio: 1/1; }
     @media (max-width: 768px) {
       .identity__layout { grid-template-columns: 1fr; }
       .identity__image { order: -1; }
@@ -859,6 +861,11 @@
       </div>
       <div class="identity__image">
         <img src="images/Limmatelier Kunstbild.jpg" alt="Limmatelier – das Flusshaus von aussen">
+        <div class="identity__thumbs">
+          <img src="images/Limmatelier Raum 1.jpg" alt="Workshopraum mit langem Holztisch, Küche im Hintergrund" loading="lazy">
+          <img src="images/Limmatelier Raum 2.jpg" alt="Langer Holztisch mit Bildschirm und Fenstern zur Limmat" loading="lazy">
+          <img src="images/Limmatelier Raum 3.jpg" alt="Workshopraum mit Holztisch, Teppich und Zürich-Karte an der Wand" loading="lazy">
+        </div>
       </div>
     </div>
   </div>
