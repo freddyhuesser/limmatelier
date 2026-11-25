@@ -246,7 +246,8 @@
     .identity__image { position: relative; }
     .identity__image img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
     .identity__thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
-    .identity__thumbs img { aspect-ratio: 1/1; }
+    .identity__thumbs img { aspect-ratio: 1/1; cursor: zoom-in; transition: opacity .2s; }
+    .identity__thumbs img:hover { opacity: .85; }
     @media (max-width: 768px) {
       .identity__layout { grid-template-columns: 1fr; }
       .identity__image { order: -1; }
@@ -1487,7 +1488,7 @@
   // Lightbox
   const lb = document.getElementById('lb');
   const lbImg = document.getElementById('lb-img');
-  document.querySelectorAll('.projekt-card__imgs .flyer, .projekt-imgs-live img').forEach(img => {
+  document.querySelectorAll('.projekt-card__imgs .flyer, .projekt-imgs-live img, .identity__thumbs img').forEach(img => {
     img.addEventListener('click', () => {
       lbImg.src = img.src;
       lb.classList.add('open');
